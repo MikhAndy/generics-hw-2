@@ -1,4 +1,4 @@
-package ru.andrey;
+package ru.andrey.Box;
 
 /*
    Класс Box, в который можно складывать фрукты. Коробки условно сортируются по типу фрукта, поэтому в одну коробку нельзя сложить и яблоки, и апельсины;
@@ -12,21 +12,43 @@ package ru.andrey;
 */
 
 
+import ru.andrey.Fruits.Fruit;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Box<T extends Fruit> {
 
-    private T[] fruits;
+    private List<T> fruits;
 
     public Box(T... fruits) {
-        this.fruits = fruits;
+        this.fruits = new ArrayList<>(Arrays.asList(fruits));
+    }
+
+    public List<T> getFruits() {
+        return fruits;
+    }
+
+    public boolean addFruits(T fruit, int count) {
+        int sizeBefore = this.fruits.size();
+        while (count != 0) {
+        this.fruits.add(fruit);
+        count--;
+        }
+        int sizeAfter = this.fruits.size();
+        return sizeBefore == sizeAfter;
     }
 
     public int getWeight() {
         int weight = 0;
-        for (int i = 0; i < fruits.length; i++) {
-            weight += fruits[i].getWeight() * fruits[i].getCount();
+        for (T t : fruits) {
+            weight += t.getWeight();
         }
         return weight;
+    }
+
+    public boolean compare(Box<?> other) {
+        return getWeight() == other.getWeight();
     }
 }
