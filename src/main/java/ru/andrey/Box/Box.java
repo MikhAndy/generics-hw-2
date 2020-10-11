@@ -30,14 +30,11 @@ public class Box<T extends Fruit> {
         return fruits;
     }
 
-    public boolean addFruits(T fruit, int count) {
-        int sizeBefore = this.fruits.size();
+    public void addFruits(T fruit, int count) {
         while (count != 0) {
         this.fruits.add(fruit);
         count--;
         }
-        int sizeAfter = this.fruits.size();
-        return sizeBefore == sizeAfter;
     }
 
     public int getWeight() {

@@ -23,8 +23,12 @@ class BoxTest {
 
     @Test
     void addFruitsTest() {
-        boolean check = appleBox.addFruits(apple,3);
-        Assertions.assertFalse(check);
+        int before;
+        int after;
+        before = appleBox.getWeight();
+        appleBox.addFruits(apple,3);
+        after = appleBox.getWeight();
+        Assertions.assertTrue(after != before);
     }
 
     @Test
